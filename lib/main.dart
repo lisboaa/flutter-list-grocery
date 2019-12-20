@@ -12,64 +12,73 @@ class MyApp extends StatelessWidget {
   }
 
   void somar() {}
-
+//#FF1565C0
+//FF64B5F6
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Lista de mcado'),
-        ),
-        body: new GridView.count(
-          crossAxisCount: 2,
+        title: "Contador de Pessoas",
+        home: Column(
+          //alinhando o conteudo no centro
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Container(
-              margin: const EdgeInsets.only(right: 10, left: 10, top: 150),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Infome o nome!',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            new Container(
-              margin: const EdgeInsets.only(
-                right: 10,
-                left: 10,
-                top: 150,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Informe o valor!',
-                  icon: new Icon(Icons.add_shopping_cart),
-                  border: OutlineInputBorder(),
-                ),
-              ),
+            Text(
+              "Pessoas: 0",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(0.0),
-                    color: Colors.cyanAccent,
-                    width: 100.0,
-                    height: 40.0,
-                    child: RaisedButton(
-                      color: Colors.deepOrange,
-                      child: Text(
-                        'Enviar',
-                      ),
-                      onPressed: () {},
-                      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      elevation: 5.0,
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: FlatButton(
+                    child: Text(
+                      "+1",
+                      style: TextStyle(fontSize: 40.0, color: Colors.white),
                     ),
+                    onPressed: () {},
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: FlatButton(
+                    child: Text(
+                      "-1",
+                      style: TextStyle(fontSize: 40.0, color: Colors.white),
+                    ),
+                    onPressed: () {},
                   ),
                 ),
               ],
             ),
+            Text(
+              "Pode Entrar!",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 30.0),
+            ),
+          ],
+        ));
+  }
+
+  Widget meuLayoutWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                child: TextField(
+                  decoration: InputDecoration(hintText: 'Infome o valor'),
+                ),
+              ),
+            )
           ],
         ),
       ),

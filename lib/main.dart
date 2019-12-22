@@ -1,29 +1,47 @@
 //importando pacote do front end (material design)
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MaterialApp(title: "Contador de Pessoas", home: Home()));
+}
 
-class MyApp extends StatelessWidget {
-  var productName = 0;
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-  void submitInformation() {
-    productName = productName + 1;
-    print(productName);
+class _HomeState extends State<Home> {
+  int _people = 0;
+  String _infoText = "Pode Entrar:";
+
+  void _changePeople(int delta) {
+    setState(() {
+      _people += delta;
+      if (_people < 0) {
+        _infoText = "Mundo invertido ?!";
+      } else if (_people <= 10) {
+        _infoText = "Pode Entrar:";
+      } else {
+        _infoText = "Lotado";
+      }
+    });
   }
 
-  void somar() {}
-//#FF1565C0
-//FF64B5F6
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: "Contador de Pessoas",
-        home: Column(
+    return Stack(
+      children: <Widget>[
+        Image.asset(
+          "images/restaurant.jpg",
+          fit: BoxFit.cover,
+          height: 1000.0,
+        ),
+        Column(
           //alinhando o conteudo no centro
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Pessoas: 0",
+              "Pessoas: $_people",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -37,7 +55,9 @@ class MyApp extends StatelessWidget {
                       "+1",
                       style: TextStyle(fontSize: 40.0, color: Colors.white),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _changePeople(1);
+                    },
                   ),
                 ),
                 Padding(
@@ -47,41 +67,23 @@ class MyApp extends StatelessWidget {
                       "-1",
                       style: TextStyle(fontSize: 40.0, color: Colors.white),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _changePeople(-1);
+                    },
                   ),
                 ),
               ],
             ),
             Text(
-              "Pode Entrar!",
+              _infoText,
               style: TextStyle(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,
                   fontSize: 30.0),
             ),
           ],
-        ));
-  }
-
-  Widget meuLayoutWidget() {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                child: TextField(
-                  decoration: InputDecoration(hintText: 'Infome o valor'),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+        )
+      ],
     );
   }
 }
